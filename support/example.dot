@@ -1,0 +1,41 @@
+digraph g {
+  rankdir=LR
+  subgraph cluster_area_one {
+    label="AgStudio"
+    subgraph cluster_a1_l1 {
+      label="Apps"
+      rank="same";
+      edge[style="invisible",dir="none"];
+      "AgStudio Desktop" -> App2;
+    }
+    subgraph cluster_a1_l2 {
+      label="Apis"
+      rank="same";
+      edge[style="invisible",dir="none"];
+      Api1 -> Api2 -> Api3;
+    }
+    subgraph cluster_a1_l3 {
+      label="Databases"
+      rank="same";
+      edge[style="invisible",dir="none"];
+      Database;
+    }
+  }
+  subgraph cluster_area_two {
+      rank="same";
+      label="Corteva"
+      edge[style="invisible",dir="none"];
+      Corteva_Api1 -> Corteva_Api2 -> Corteva_Api3;
+  }
+  subgraph cluster_area_three {
+      rank="same";
+      label="Platform";
+      edge[style="invisible",dir="none"];
+      Platform_Api1 -> Platform_Api2 -> Platform_Api3;
+  }
+  "AgStudio Desktop" -> { Api1; Api3 } [constraint=false];
+  App2 -> { Api1; Api2; Corteva_Api3 } [constraint=false];
+  Api1 -> { Database; Platform_Api1; } [constraint=false];
+  Api2 -> { Database; Corteva_Api2; } [constraint=false];
+  Api3 -> Database [constraint=false];
+}
