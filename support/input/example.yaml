@@ -1,0 +1,53 @@
+types:
+    app-web:
+        name: Web Application
+        descripton: "A web application, SPA, PWA"
+    app-mobile:
+        name: Mobile App
+        description: "A native mobile application"
+    database:
+        name: Database
+        descripton: "A SQL or NOSQL database, or a table in a serverless database"
+        shape: cylinder
+teams:
+    gomponeres:
+        name: Gomponeres
+        team-contact:
+            email: abram@abramsimon.com
+        lead-contact:
+            name: Abram Simon
+            email: abram@abramsimon.com
+        display:
+            background-color: coral
+            foreground-color: black
+levels:
+    system:
+        name: System (level 1)
+    container:
+        name: Container (level 2)
+    component:
+        name: Component (level 3)
+    code:
+        name: Code (level 4)
+areas:
+    the-company:
+        name: The Company
+    the-system:
+        name: The System
+        parent: the-company
+    the-system-us-east-1:
+        name: us-east-1
+        parent: the-system
+components:
+    the-web-app-east:
+        name: The Best Web Application Ever
+        level: component
+        type: app-web
+        team: gomponeres
+        area: the-system-us-east-1
+        dependencies:
+            - the-database
+    the-database:
+        name: The Database
+        level: component
+        type: database

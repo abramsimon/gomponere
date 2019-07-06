@@ -1,9 +1,18 @@
 package main
 
-import "fmt"
-import "github.com/emicklei/dot"
+import (
+	"./pkg/input"
+	"github.com/emicklei/dot"
+	"github.com/spf13/afero"
+)
 
 func main() {
+	fs := afero.NewOsFs()
+
+	if err := input.ReadAll(fs, "./support/input"); err != nil {
+		panic(err.Error())
+	}
+
 	// create graph
 	//	dir=LR
 	g := dot.NewGraph(dot.Directed)
@@ -91,5 +100,5 @@ func main() {
 	agstudio_api3.Edge(agstudio_database).Attr("constraint", "false")
 
 	// output dot to the console
-	fmt.Print(g.String())
+	// fmt.Print(g.String())
 }
