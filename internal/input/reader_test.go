@@ -173,6 +173,12 @@ var _ = Describe("Reader", func() {
 			bytes, err = reader.ReadAll(root)
 		})
 
+		Context("with an empty filesystem", func() {
+			It("does error", func() {
+				Expect(err).ToNot(BeNil())
+			})
+		})
+
 		Context("with the root folder", func() {
 			BeforeEach(func() {
 				if err = fs.Mkdir(root, os.ModePerm); err != nil {
