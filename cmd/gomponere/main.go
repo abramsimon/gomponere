@@ -1,15 +1,18 @@
 package main
 
 import (
-	"./pkg/input"
+	"../../internal/input"
 	"github.com/emicklei/dot"
 	"github.com/spf13/afero"
 )
 
 func main() {
-	fs := afero.NewOsFs()
+	var err error
 
-	if err := input.ReadAll(fs, "./support/input"); err != nil {
+	fs := afero.NewOsFs()
+	reader := input.NewReader(fs)
+
+	if _, err = reader.ReadAll("../test/input"); err != nil {
 		panic(err.Error())
 	}
 
