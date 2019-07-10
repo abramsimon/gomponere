@@ -19,7 +19,7 @@ var _ = Describe("Unmarshall", func() {
 	})
 
 	JustBeforeEach(func() {
-		diagram, err = input.Unmarshall(data)
+		diagram, err = input.Unmarshal(data)
 	})
 
 	Context("with no data", func() {

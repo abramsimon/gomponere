@@ -8,7 +8,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-func Unmarshall(data []byte) (model.Diagram, error) {
+func Unmarshal(data []byte) (model.Diagram, error) {
 	if len(data) == 0 {
 		return model.Diagram{}, fmt.Errorf("data cannot be empty")
 	}

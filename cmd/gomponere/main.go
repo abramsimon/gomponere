@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"../../internal/input"
 	"github.com/emicklei/dot"
 	"github.com/spf13/afero"
@@ -12,7 +14,13 @@ func main() {
 	fs := afero.NewOsFs()
 	reader := input.NewReader(fs)
 
-	if _, err = reader.ReadAll("../test/input"); err != nil {
+	data, err := reader.ReadAll("../test/input")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	_, err = input.Unmarshal(data)
+	if err != nil {
 		panic(err.Error())
 	}
 
@@ -103,5 +111,5 @@ func main() {
 	agstudio_api3.Edge(agstudio_database).Attr("constraint", "false")
 
 	// output dot to the console
-	// fmt.Print(g.String())
+	fmt.Print(g.String())
 }
