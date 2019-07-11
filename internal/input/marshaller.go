@@ -16,6 +16,9 @@ func Unmarshal(data []byte) (model.Diagram, error) {
 	r := bytes.NewReader(data)
 	dec := yaml.NewDecoder(r)
 
+	// strict will error on extra data or duplicate keys
+	dec.SetStrict(true)
+
 	var d model.Diagram
 
 	if err := dec.Decode(&d); err != nil {
