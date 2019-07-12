@@ -186,13 +186,34 @@ var _ = Describe("Reader", func() {
 				}
 			})
 
-			Context("with a single matched file", func() {
+			Context("with a single matched file ending without a newline", func() {
 				var (
 					fileOne string
 				)
 
 				BeforeEach(func() {
-					fileOne = `the first file content`
+					fileOne = "the first file content"
+
+					if err = afero.WriteFile(fs, filepath.Join(root, "one.yaml"), []byte(fileOne), os.ModePerm); err != nil {
+						Fail(err.Error())
+					}
+				})
+
+				It("does not error", func() {
+					Expect(err).To(BeNil())
+				})
+				It("reads the bytes from the file", func() {
+					Expect(bytes).To(Equal([]byte(fileOne + "\n")))
+				})
+			})
+
+			Context("with a single matched file ending with a newline", func() {
+				var (
+					fileOne string
+				)
+
+				BeforeEach(func() {
+					fileOne = "the first file content\n"
 
 					if err = afero.WriteFile(fs, filepath.Join(root, "one.yaml"), []byte(fileOne), os.ModePerm); err != nil {
 						Fail(err.Error())

@@ -1,0 +1,26 @@
+types:
+    app-web:
+        name: Web Application
+        description: "A web application, SPA, PWA"
+    app-mobile:
+        name: Mobile App
+        description: "A native mobile application"
+    database:
+        name: Database
+        description: "A SQL or NOSQL database, or a table in a serverless database"
+        shape: cylinder
+levels:
+    system:
+        name: System
+    container:
+        name: Container
+    component:
+        name: Component
+    component-1:
+        name: Component
+    component-2:
+        name: Component
+    component-3:
+        name: Component
+    code:
+        name: Code
