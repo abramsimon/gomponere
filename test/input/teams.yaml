@@ -1,0 +1,21 @@
+teams:
+    gomponeres:
+        name: Gomponeres
+        team-contact:
+            email: abram@abramsimon.com
+        lead-contact:
+            name: Abram Simon
+            email: abram@abramsimon.com
+        display:
+            background-color: coral
+            foreground-color: black
+    thundercats:
+        name: Thundercats
+        team-contact:
+            email: abram@abramsimon.com
+        lead-contact:
+            name: Abram Simon
+            email: abram@abramsimon.com
+        display:
+            background-color: darkgreen
+            foreground-color: white

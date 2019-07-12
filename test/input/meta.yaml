@@ -9,17 +9,6 @@ types:
         name: Database
         description: "A SQL or NOSQL database, or a table in a serverless database"
         shape: cylinder
-teams:
-    gomponeres:
-        name: Gomponeres
-        team-contact:
-            email: abram@abramsimon.com
-        lead-contact:
-            name: Abram Simon
-            email: abram@abramsimon.com
-        display:
-            background-color: coral
-            foreground-color: black
 levels:
     system:
         name: System

@@ -37,6 +37,9 @@ func MakeDot(diagram model.Diagram) (string, error) {
 	}
 
 	// add the teams to the graph (kinda like a legend)
+	if err := MakeTeams(diagram, g); err != nil {
+		return "", err
+	}
 
 	return g.String(), nil
 }
@@ -100,7 +103,12 @@ func MakeLevels(diagram model.Diagram, graph *dot.Graph, level model.Level, leve
 	// add child components to the graph
 	var prev *dot.Node
 	for k, c := range components {
+		t := diagram.Teams[c.TeamKey]
+
 		n := g.Node(c.Name)
+		n.Attr("style", "filled").
+			Attr("color", t.Display.BackgroundColor).
+			Attr("fontcolor", t.Display.ForegroundColor)
 
 		// create an invisible edge to the previous node
 		// this is the trick that makes left-right ranking work
@@ -118,4 +126,30 @@ func MakeLevels(diagram model.Diagram, graph *dot.Graph, level model.Level, leve
 	}
 
 	return nodes, nil
+}
+
+func MakeTeams(diagram model.Diagram, graph *dot.Graph) error {
+	// add the teams subgraph to the graph
+	g := graph.Subgraph("Teams", dot.ClusterOption{})
+	g.Attr("rank", "same")
+
+	var prev *dot.Node
+	for _, t := range diagram.Teams {
+		n := g.Node(t.Name)
+		n.Attr("style", "filled").
+			Attr("color", t.Display.BackgroundColor).
+			Attr("fontcolor", t.Display.ForegroundColor)
+
+		// create an invisible edge to the previous node
+		// this is the trick that makes left-right ranking work
+		if prev != nil {
+			prev.Edge(n).
+				Attr("style", "invisible").
+				Attr("dir", "none")
+		}
+
+		prev = &n
+	}
+
+	return nil
 }

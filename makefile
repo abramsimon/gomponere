@@ -1,7 +1,7 @@
 .PHONY: build test run-dot
 
 build:
-	cd cmd/gomponere/; go build -race -o ../../dist/gomponere
+	cd cmd/gomponere/; CGO_ENABLED=0 go build -o ../../dist/gomponere
 test:
 	ginkgo -cover -race --randomizeAllSpecs --failOnPending ./...
 run-dot: build
