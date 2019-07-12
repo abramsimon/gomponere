@@ -12,6 +12,12 @@ func MakeDot(diagram model.Diagram) (string, error) {
 	// rank direction of LR is important for our layout
 	g.Attr("rankdir", "LR")
 
+	// add the teams to the graph (kinda like a legend)
+	if err := MakeTeams(diagram, g); err != nil {
+		return "", err
+	}
+
+	// keep a running list of nodes to make edges from
 	nodes := make(map[string]dot.Node, len(diagram.Components))
 
 	// add areas and components to the graph, starting with root areas (no parents) and traversing recursively
@@ -34,11 +40,6 @@ func MakeDot(diagram model.Diagram) (string, error) {
 		for _, rk := range lc.DependencyKeys {
 			nodes[lk].Edge(nodes[rk]).Attr("constraint", "false")
 		}
-	}
-
-	// add the teams to the graph (kinda like a legend)
-	if err := MakeTeams(diagram, g); err != nil {
-		return "", err
 	}
 
 	return g.String(), nil
