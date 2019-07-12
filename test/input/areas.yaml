@@ -1,0 +1,12 @@
+areas:
+    the-company:
+        name: The Company
+    the-system:
+        name: The System
+        parent: the-company
+    the-system-us-east-1:
+        name: us-east-1
+        parent: the-system
+    the-system-us-east-2:
+        name: us-east-2
+        parent: the-system

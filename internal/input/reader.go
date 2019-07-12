@@ -1,7 +1,7 @@
 package input
 
 import (
-	"io"
+	"bytes"
 	"os"
 	"path/filepath"
 
@@ -31,8 +31,8 @@ func (r ReaderImpl) ReadAll(root string) ([]byte, error) {
 		return nil, err
 	}
 
-	// open all the readers
-	var readers []io.Reader
+	// read all of the files
+	allBytes := []byte{}
 	for _, name := range yamlFiles {
 		f, err := r.fs.Open(name)
 		if err != nil {
@@ -40,16 +40,20 @@ func (r ReaderImpl) ReadAll(root string) ([]byte, error) {
 		}
 		defer f.Close()
 
-		readers = append(readers, f)
+		b, err := afero.ReadAll(f)
+		if err != nil {
+			return nil, err
+		}
+
+		allBytes = append(allBytes, b...)
+
+		// if the last byte is not a newline, append one so the yaml can unmarshal properly
+		if !bytes.HasSuffix(allBytes, []byte{'\n'}) {
+			allBytes = append(allBytes, byte('\n'))
+		}
 	}
 
-	// get all the bytes
-	b, err := afero.ReadAll(io.MultiReader(readers...))
-	if err != nil {
-		return nil, err
-	}
-
-	return b, nil
+	return allBytes, nil
 }
 
 func (r ReaderImpl) FindFiles(root string) ([]string, error) {

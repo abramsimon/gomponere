@@ -1,0 +1,38 @@
+components:
+    the-web-app-east-1:
+        name: The Web App
+        level: component-1
+        type: app-web
+        team: gomponeres
+        area: the-system-us-east-1
+        dependencies:
+            - the-api-east-1
+    the-api-east-1:
+        name: Api
+        level: component-2
+        type: app-web
+        team: gomponeres
+        area: the-system-us-east-1
+        dependencies:
+            - the-database
+    the-web-app-east-2:
+        name: The Web App
+        level: component-1
+        type: app-web
+        team: gomponeres
+        area: the-system-us-east-2
+        dependencies:
+            - the-api-east-2
+    the-api-east-2:
+        name: Api
+        level: component-2
+        type: app-web
+        team: gomponeres
+        area: the-system-us-east-2
+        dependencies:
+            - the-database
+    the-database:
+        name: The Database
+        level: component
+        type: database
+        area: the-system

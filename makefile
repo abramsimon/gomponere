@@ -5,4 +5,4 @@ build:
 test:
 	ginkgo -cover -race --randomizeAllSpecs --failOnPending ./...
 run-dot: build
-	cd dist; ./gomponere | dot -Tpng  > ../test/output/test.png && open ../test/output/test.png
+	cd dist; ./gomponere -i=../test/input | dot -Tpng  > ../test/output/test.png && open ../test/output/test.png
